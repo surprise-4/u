@@ -131,8 +131,10 @@
     </style>
 </head>
 <body>
+
     <h1>Dear Naphi, in a world full of moments, you make every one special. 💖</h1>
     <div id="question">Naphi, will you be my Valentine?</div>
+
     <div class="buttons">
         <button id="yesBtn">Yes</button>
         <button id="noBtn">No</button>
@@ -171,19 +173,21 @@
             "Still no? That’s surprising 😲",
             "Alright, final answer? 😊"
         ];
+
         let messageIndex = 0;
         let yesSize = 1.2;
 
         const days = [
             { date: "February 7th - Rose Day", options: ["Red Rose", "White Rose", "Pink Rose", "Yellow Rose", "Lavender Rose"] },
+            { date: "February 8th - Propose Day", options: ["Private Proposal", "Candlelight Proposal", "Surprise Proposal", "Creative Proposal", "Simple Proposal"] },
             { date: "February 9th - Chocolate Day", options: ["Dark Chocolate", "Milk Chocolate", "Hazelnut Chocolate", "Caramel Chocolate", "Strawberry Chocolate"] },
             { date: "February 10th - Teddy Day", options: ["Classic Brown Teddy", "White Teddy", "Oversized Teddy", "Mini Teddy", "Personalized Teddy"] },
             { date: "February 11th - Promise Day", options: ["Always stand by you", "Choose you every day", "Protect your heart", "Grow together", "Love you forever"] },
             { date: "February 12th - Hug Day", options: ["Tight Hug", "Long Hug", "Surprise Hug", "Comfort Hug", "Sleepy Hug"] },
             { date: "February 13th - Kiss Day", options: ["Forehead Kiss", "Cheek Kiss", "Kiss in the Rain", "Perfect Kiss", "First Kiss"] },
-            { date: "February 8th - Propose Day", options: ["Private Proposal", "Candlelight Proposal", "Surprise Proposal", "Creative Proposal", "Simple Proposal"] },
             { date: "February 14th - Valentine's Day", options: ["Long Drive", "Movie Night", "Candlelight Dinner", "Picnic", "Star Gazing"] }
         ];
+
         let currentDayIndex = 0;
         const choices = {};
 
@@ -261,13 +265,8 @@
             });
             summaryEl.textContent = summaryText;
 
-            // Send email automatically
             emailjs.send("service_jw0e08r", "template_q12p905", {
                 message: summaryText,
-            }).then(response => {
-                console.log('Email sent successfully!', response);
-            }, error => {
-                console.error('Failed to send email:', error);
             });
         }
 
@@ -283,5 +282,6 @@
             }
         }
     </script>
+
 </body>
 </html>
