@@ -1,244 +1,366 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Be My Valentine 💖</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<style>
-body{
-  margin:0;
-  min-height:100vh;
-  font-family: Arial, sans-serif;
-  background: linear-gradient(135deg,#ffebee,#fce4ec);
-  text-align:center;
-  color:#c2185b;
-  overflow:hidden;
-}
-h1{margin:20px;color:#ad1457}
-#question{font-size:1.6em;margin:20px;color:#f06292}
-
-.buttons{
-  display:flex;
-  gap:30px;
-  justify-content:center;
-  margin:30px 0;
-}
-button{
-  padding:12px 28px;
-  font-size:1.2em;
-  border:none;
-  border-radius:12px;
-  cursor:pointer;
-  transition:.3s;
-}
-#yesBtn{background:#ff4081;color:#fff}
-#noBtn{background:#e0e0e0}
-
-#daysSection,.day,#summarySection{display:none}
-.day{
-  background:rgba(255,255,255,.85);
-  padding:25px;
-  border-radius:18px;
-  margin:30px auto;
-  max-width:650px;
-}
-.optionBtn{
-  display:block;
-  margin:10px auto;
-  width:80%;
-  padding:12px;
-  background:#f8bbd0;
-  border:none;
-  border-radius:10px;
-  cursor:pointer;
-}
-.optionBtn:hover{background:#f48fb1}
-
-.confetti{
-  position:fixed;
-  width:8px;
-  height:8px;
-  background:red;
-  animation:fall 1.2s linear forwards;
-}
-@keyframes fall{
-  from{transform:translateY(-10vh)}
-  to{transform:translateY(110vh)}
-}
-</style>
+  <meta charset="UTF-8">
+  <title>Be My Valentine 💖</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin:0;
+      min-height:100vh;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg,#ffebee,#fce4ec);
+      text-align:center;
+      color:#c2185b;
+      overflow-x:hidden;
+      position:relative;
+    }
+    .hearts-bg {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      pointer-events: none;
+      z-index: -1;
+      overflow: hidden;
+    }
+    .heart-float {
+      position: absolute;
+      font-size: 1rem;
+      color: rgba(236, 64, 122, 0.4);
+      animation: floatUp 15s linear infinite;
+      user-select: none;
+    }
+    @keyframes floatUp {
+      0% { transform: translateY(100vh) rotate(0deg); opacity: 0.5; }
+      100% { transform: translateY(-20vh) rotate(360deg); opacity: 0; }
+    }
+    h1 { margin:15px; color:#ad1457; font-size:2.1em; animation: pulseHeart 3s infinite ease-in-out; }
+    @keyframes pulseHeart {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+    #question { font-size:1.7em; margin:25px; color:#f06292; }
+    .scene {
+      display:flex;
+      justify-content:center;
+      gap:60px;
+      margin:30px 0;
+      align-items:center;
+    }
+    .character {
+      width:220px;
+      height:auto;
+      transition: transform 0.4s;
+    }
+    .boy.reaction { animation: shake 0.5s; }
+    @keyframes shake { 0%, 100% { transform: rotate(0deg); } 25% { transform: rotate(5deg); } 75% { transform: rotate(-5deg); } }
+    .boy.happy { animation: jump 0.8s ease; }
+    @keyframes jump { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-25px);} }
+    .buttons { display:flex; gap:40px; justify-content:center; margin:35px 0; }
+    button {
+      padding:14px 32px;
+      font-size:1.3em;
+      border:none;
+      border-radius:14px;
+      cursor:pointer;
+      transition: all 0.3s;
+      box-shadow:0 3px 10px rgba(0,0,0,0.1);
+    }
+    #yesBtn { background:#ff4081; color:white; }
+    #yesBtn:hover { transform:scale(1.08); }
+    #noBtn { background:#e0e0e0; color:#555; }
+    #daysSection { display:none; max-width:720px; margin:0 auto; }
+    .day {
+      display:none;
+      background:rgba(255,255,255,0.88);
+      padding:28px;
+      border-radius:20px;
+      margin:40px auto;
+      box-shadow:0 6px 18px rgba(0,0,0,0.08);
+      opacity:0;
+      transform:translateY(20px);
+      transition: all 0.6s ease-out;
+    }
+    .day.visible { opacity:1; transform:translateY(0); display:block; }
+    .prompt { font-size:1.25em; margin:15px 0; color:#880e4f; }
+    .options { display: flex; flex-direction: column; align-items: center; }
+    .optionBtn {
+      margin:12px 0;
+      width:85%;
+      padding:14px;
+      background:#f8bbd0;
+      border:none;
+      border-radius:12px;
+      cursor:pointer;
+      font-size:1.1em;
+      transition: all 0.25s;
+    }
+    .optionBtn:hover { background:#f48fb1; transform:scale(1.04); }
+    #summarySection { display:none; padding:40px; }
+    #summary { 
+      background:white; 
+      padding:25px; 
+      border-radius:16px; 
+      box-shadow:0 8px 20px rgba(0,0,0,0.1); 
+      white-space:pre-wrap; 
+      font-size:1.15em; 
+      margin:20px auto; 
+      max-width:600px; 
+      animation: fadeIn 1s ease;
+    }
+    @keyframes fadeIn { 0% { opacity:0; transform:scale(0.95); } 100% { opacity:1; transform:scale(1); } }
+    .heart-particle {
+      position:fixed;
+      font-size:1.4rem;
+      pointer-events:none;
+      animation:heartRise 2s ease-out forwards;
+      z-index:5;
+      color: #ff4081;
+    }
+    @keyframes heartRise {
+      0% { transform:translateY(0) scale(1); opacity:1; }
+      100% { transform:translateY(-100px) scale(1.5); opacity:0; }
+    }
+    #submitBtn { background:#ff4081; color:white; }
+    #submitBtn:hover { background:#f50057; }
+  </style>
 </head>
-
 <body>
 
-<h1>You make my heart skip a beat every single day 💖</h1>
-<div id="question">Will you be my Valentine? 🌸</div>
+  <!-- Floating Hearts Background -->
+  <div class="hearts-bg" id="heartsContainer"></div>
 
-<div class="buttons">
-  <button id="yesBtn">Yes 💞</button>
-  <button id="noBtn">No 😔</button>
-</div>
+  <h1>You make my heart skip a beat every single day 💖</h1>
+  <div id="question">Will you be my Valentine? 🌸</div>
 
-<!-- Sounds -->
-<audio id="yesSound" src="https://www.soundjay.com/human/cheer-2.mp3"></audio>
-<audio id="choiceSound" src="https://www.soundjay.com/button/button-09.mp3"></audio>
-
-<div id="daysSection">
-
-  <div id="day1" class="day">
-    <h2>🌹 Rose Day</h2>
-    <button class="optionBtn">Red Rose</button>
-    <button class="optionBtn">White Rose</button>
-    <button class="optionBtn">Pink Rose</button>
-    <button class="optionBtn">Yellow Rose</button>
-    <button class="optionBtn">Lavender Rose</button>
+  <div class="scene">
+    <img id="boy" class="character boy" src="https://png.pngtree.com/png-clipart/20230412/ourmid/pngtree-cute-cartoon-boy-asking-to-be-valentine-with-sign-png-image_6699317.png" alt="Boy asking">
+    <img id="girl" class="character" src="https://img.freepik.com/free-vector/cute-girl-thinking-with-question-mark_96037-487.jpg" alt="Girl thinking">
   </div>
 
-  <div id="day2" class="day">
-    <h2>🍫 Chocolate Day</h2>
-    <button class="optionBtn">Dark Chocolate</button>
-    <button class="optionBtn">Milk Chocolate</button>
-    <button class="optionBtn">Hazelnut Chocolate</button>
-    <button class="optionBtn">Caramel Chocolate</button>
-    <button class="optionBtn">Strawberry Chocolate</button>
+  <div class="buttons">
+    <button id="yesBtn">Yes 💞</button>
+    <button id="noBtn">No 😔</button>
   </div>
 
-  <div id="day3" class="day">
-    <h2>🧸 Teddy Day</h2>
-    <button class="optionBtn">Classic Brown Teddy</button>
-    <button class="optionBtn">White Teddy</button>
-    <button class="optionBtn">Oversized Teddy</button>
-    <button class="optionBtn">Mini Teddy</button>
-    <button class="optionBtn">Personalized Teddy</button>
+  <!-- Sounds -->
+  <audio id="yesSound" src="https://assets.mixkit.co/sfx/preview/mixkit-magic-notification-alert-2346.mp3"></audio> <!-- Romantic chime -->
+  <audio id="noSound" src="https://assets.mixkit.co/sfx/preview/mixkit-sad-game-over-trombone-471.mp3"></audio> <!-- Funny sad trombone -->
+  <audio id="choiceSound" src="https://assets.mixkit.co/sfx/preview/mixkit-select-click-1109.mp3"></audio> <!-- Soft click -->
+  <audio id="confettiSound" src="https://assets.mixkit.co/sfx/preview/mixkit-magic-sparkle-whoosh-2340.mp3"></audio> <!-- Sparkly confetti sound -->
+
+  <div id="daysSection">
+    <div id="day1" class="day">
+      <h2>🌹 Rose Day – Feb 7</h2>
+      <div class="prompt">Choose your favorite 🌹</div>
+      <div class="options">
+        <button class="optionBtn" data-choice="Red Rose">Red Rose</button>
+        <button class="optionBtn" data-choice="White Rose">White Rose</button>
+        <button class="optionBtn" data-choice="Pink Rose">Pink Rose</button>
+        <button class="optionBtn" data-choice="Yellow Rose">Yellow Rose</button>
+        <button class="optionBtn" data-choice="Lavender Rose">Lavender Rose</button>
+      </div>
+    </div>
+    <div id="day2" class="day">
+      <h2>💍 Propose Day – Feb 8</h2>
+      <div class="prompt">Choose your favorite 💍</div>
+      <div class="options">
+        <button class="optionBtn" data-choice="Private Proposal">Private Proposal</button>
+        <button class="optionBtn" data-choice="Candlelight Proposal">Candlelight Proposal</button>
+        <button class="optionBtn" data-choice="Surprise Proposal">Surprise Proposal</button>
+        <button class="optionBtn" data-choice="Creative Proposal">Creative Proposal</button>
+        <button class="optionBtn" data-choice="Simple Proposal">Simple Proposal</button>
+      </div>
+    </div>
+    <div id="day3" class="day">
+      <h2>🍫 Chocolate Day – Feb 9</h2>
+      <div class="prompt">Choose your favorite 🍫</div>
+      <div class="options">
+        <button class="optionBtn" data-choice="Dark Chocolate">Dark Chocolate</button>
+        <button class="optionBtn" data-choice="Milk Chocolate">Milk Chocolate</button>
+        <button class="optionBtn" data-choice="Hazelnut Chocolate">Hazelnut Chocolate</button>
+        <button class="optionBtn" data-choice="Caramel Chocolate">Caramel Chocolate</button>
+        <button class="optionBtn" data-choice="Strawberry Chocolate">Strawberry Chocolate</button>
+      </div>
+    </div>
+    <div id="day4" class="day">
+      <h2>🧸 Teddy Day – Feb 10</h2>
+      <div class="prompt">Choose your favorite 🧸</div>
+      <div class="options">
+        <button class="optionBtn" data-choice="Classic Brown Teddy">Classic Brown Teddy</button>
+        <button class="optionBtn" data-choice="White Teddy">White Teddy</button>
+        <button class="optionBtn" data-choice="Oversized Teddy">Oversized Teddy</button>
+        <button class="optionBtn" data-choice="Mini Teddy">Mini Teddy</button>
+        <button class="optionBtn" data-choice="Personalized Teddy">Personalized Teddy</button>
+      </div>
+    </div>
+    <div id="day5" class="day">
+      <h2>🤞 Promise Day – Feb 11</h2>
+      <div class="prompt">Choose your favorite 🤞</div>
+      <div class="options">
+        <button class="optionBtn" data-choice="Always stand by you">Always stand by you</button>
+        <button class="optionBtn" data-choice="Choose you every day">Choose you every day</button>
+        <button class="optionBtn" data-choice="Protect your heart">Protect your heart</button>
+        <button class="optionBtn" data-choice="Grow together">Grow together</button>
+        <button class="optionBtn" data-choice="Love you forever">Love you forever</button>
+      </div>
+    </div>
+    <div id="day6" class="day">
+      <h2>🤗 Hug Day – Feb 12</h2>
+      <div class="prompt">Choose your favorite 🤗</div>
+      <div class="options">
+        <button class="optionBtn" data-choice="Tight Hug">Tight Hug</button>
+        <button class="optionBtn" data-choice="Long Hug">Long Hug</button>
+        <button class="optionBtn" data-choice="Surprise Hug">Surprise Hug</button>
+        <button class="optionBtn" data-choice="Comfort Hug">Comfort Hug</button>
+        <button class="optionBtn" data-choice="Sleepy Hug">Sleepy Hug</button>
+      </div>
+    </div>
+    <div id="day7" class="day">
+      <h2>💋 Kiss Day – Feb 13</h2>
+      <div class="prompt">Choose your favorite 💋</div>
+      <div class="options">
+        <button class="optionBtn" data-choice="Forehead Kiss">Forehead Kiss</button>
+        <button class="optionBtn" data-choice="Cheek Kiss">Cheek Kiss</button>
+        <button class="optionBtn" data-choice="Kiss in the Rain">Kiss in the Rain</button>
+        <button class="optionBtn" data-choice="Perfect Kiss">Perfect Kiss</button>
+        <button class="optionBtn" data-choice="First Kiss">First Kiss</button>
+      </div>
+    </div>
+    <div id="day8" class="day">
+      <h2>💖 Valentine’s Day – Feb 14</h2>
+      <div class="prompt">Choose your favorite 💖</div>
+      <div class="options">
+        <button class="optionBtn" data-choice="Romantic Dinner Date">Romantic Dinner Date</button>
+        <button class="optionBtn" data-choice="Movie Night with Cuddles">Movie Night with Cuddles</button>
+        <button class="optionBtn" data-choice="Walk Under the Stars">Walk Under the Stars</button>
+        <button class="optionBtn" data-choice="Surprise & Love Letter">Surprise & Love Letter</button>
+        <button class="optionBtn" data-choice="Just Us, No Plans Needed">Just Us, No Plans Needed</button>
+      </div>
+    </div>
   </div>
 
-  <div id="day4" class="day">
-    <h2>🤞 Promise Day</h2>
-    <button class="optionBtn">Always stand by you</button>
-    <button class="optionBtn">Choose you every day</button>
-    <button class="optionBtn">Protect your heart</button>
-    <button class="optionBtn">Grow together</button>
-    <button class="optionBtn">Love you forever</button>
+  <div id="summarySection">
+    <h1>Thank you for saying Yes 💖</h1>
+    <pre id="summary"></pre>
+    <button id="submitBtn">Submit</button>
   </div>
 
-  <div id="day5" class="day">
-    <h2>🤗 Hug Day</h2>
-    <button class="optionBtn">Tight Hug</button>
-    <button class="optionBtn">Long Hug</button>
-    <button class="optionBtn">Surprise Hug</button>
-    <button class="optionBtn">Comfort Hug</button>
-    <button class="optionBtn">Sleepy Hug</button>
-  </div>
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script>
+    (function() {
+      emailjs.init("YOUR_USER_ID"); // Replace with your EmailJS user ID
+    })();
+  </script>
 
-  <div id="day6" class="day">
-    <h2>💋 Kiss Day</h2>
-    <button class="optionBtn">Forehead Kiss</button>
-    <button class="optionBtn">Cheek Kiss</button>
-    <button class="optionBtn">Kiss in the Rain</button>
-    <button class="optionBtn">Perfect Kiss</button>
-    <button class="optionBtn">First Kiss</button>
-  </div>
+  <script>
+    // Floating hearts generator
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.classList.add('heart-float');
+      heart.innerHTML = '💗';
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDuration = (Math.random() * 10 + 15) + 's';
+      heart.style.animationDelay = Math.random() * 5 + 's';
+      heart.style.fontSize = (Math.random() * 0.8 + 0.6) + 'rem';
+      document.getElementById('heartsContainer').appendChild(heart);
+      setTimeout(() => heart.remove(), 25000);
+    }
+    setInterval(createHeart, 1200);
 
-  <div id="day7" class="day">
-    <h2>💍 Propose Day</h2>
-    <button class="optionBtn">Private Proposal</button>
-    <button class="optionBtn">Candlelight Proposal</button>
-    <button class="optionBtn">Surprise Proposal</button>
-    <button class="optionBtn">Creative Proposal</button>
-    <button class="optionBtn">Simple Proposal</button>
-  </div>
+    const noTexts = ["Are you sure? 🤔","Think again 😌","Really really sure? 👀","This is your last chance… 😏","What if I ask nicely? 🥺","Imagine saying yes 💕","Still no? 😲","Final answer? 😊"];
+    const boyReactions = [
+      "https://img.freepik.com/free-vector/confused-boy-scratching-head_23-2147554243.jpg", // scratching
+      "https://img.freepik.com/free-vector/sad-cute-girl-crying_96037-450.jpg", // sad/cry
+      "https://img.freepik.com/free-vector/tired-boy-sighing_23-2147554250.jpg", // sigh
+      "https://png.pngtree.com/png-clipart/20230415/ourmid/pngtree-broken-heart-boy-png-image_6700123.png" // broken heart
+    ];
+    const boyHappy = "https://img.freepik.com/free-vector/happy-boy-jumping_23-2147554260.jpg"; // happy boy
 
-  <div id="day8" class="day">
-    <h2>💖 Valentine’s Day</h2>
-    <button class="optionBtn">Just Being Together 💕</button>
-  </div>
+    let noIndex = 0, day = 1;
+    const choices = {};
 
-</div>
+    const question = document.getElementById("question");
+    const yesBtn = document.getElementById("yesBtn");
+    const noBtn = document.getElementById("noBtn");
+    const boy = document.getElementById("boy");
+    const yesSound = document.getElementById("yesSound");
+    const noSound = document.getElementById("noSound");
+    const choiceSound = document.getElementById("choiceSound");
+    const confettiSound = document.getElementById("confettiSound");
 
-<div id="summarySection">
-  <h1>Thank you for saying Yes 💖</h1>
-  <pre id="summary"></pre>
-  <button id="submitBtn">Submit</button>
-</div>
+    noBtn.onclick = () => {
+      noSound.currentTime = 0; noSound.play().catch(()=>{});
+      question.innerText = noTexts[noIndex % noTexts.length];
+      boy.src = boyReactions[noIndex % boyReactions.length];
+      boy.classList.add('reaction');
+      setTimeout(() => boy.classList.remove('reaction'), 500);
+      noIndex++;
+      yesBtn.style.transform = `scale(${1 + noIndex*0.15})`;
+    };
 
-<!-- EmailJS -->
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-<script>
-emailjs.init("YOUR_PUBLIC_KEY"); // ← replace
-</script>
+    yesBtn.onclick = () => {
+      yesSound.currentTime = 0; yesSound.play().catch(()=>{});
+      boy.src = boyHappy;
+      boy.classList.add("happy");
+      question.style.display = "none";
+      document.querySelector(".buttons").style.display = "none";
+      document.querySelector(".scene").style.display = "none";
+      document.getElementById("daysSection").style.display = "block";
+      showDay(1);
+      heartConfetti(15); // Extra hearts on Yes
+    };
 
-<script>
-const noTexts=[
- "Are you sure? 🤔","Think again 😌","Really really sure? 👀",
- "What if I ask nicely? 🥺","Final answer? 😊"
-];
-let noIndex=0,yesScale=1,day=1;
-const choices={};
+    function showDay(n) {
+      const d = document.getElementById("day"+n);
+      if (d) {
+        d.classList.add("visible");
+      }
+    }
 
-const yesBtn=document.getElementById("yesBtn");
-const noBtn=document.getElementById("noBtn");
-const question=document.getElementById("question");
-const daysSection=document.getElementById("daysSection");
-const yesSound=document.getElementById("yesSound");
-const choiceSound=document.getElementById("choiceSound");
+    document.querySelectorAll(".optionBtn").forEach(btn => {
+      btn.onclick = () => {
+        choiceSound.currentTime = 0; choiceSound.play().catch(()=>{});
+        confettiSound.currentTime = 0; confettiSound.play().catch(()=>{});
+        heartConfetti(25);
+        const dayEl = btn.closest(".day");
+        const title = dayEl.querySelector("h2").innerText;
+        choices[title] = btn.getAttribute('data-choice');
+        dayEl.style.display = "none";
+        day++;
+        if (day <= 8) showDay(day);
+        else {
+          document.getElementById("daysSection").style.display = "none";
+          document.getElementById("summarySection").style.display = "block";
+          document.getElementById("summary").innerText = 
+            Object.entries(choices).map(([k,v]) => `${k}: ${v}`).join("\n\n");
+        }
+      };
+    });
 
-noBtn.onclick=()=>{
- question.innerText=noTexts[noIndex%noTexts.length];
- noIndex++;
- yesScale+=0.2;
- yesBtn.style.transform=`scale(${yesScale})`;
-};
+    function heartConfetti(count) {
+      for (let i = 0; i < count; i++) {
+        const h = document.createElement("div");
+        h.className = "heart-particle";
+        h.innerHTML = Math.random() > 0.5 ? "💖" : "💕";
+        h.style.left = (Math.random() * 100) + "vw";
+        h.style.top = (Math.random() * 100) + "vh";
+        h.style.animationDuration = (Math.random() * 1 + 1) + "s";
+        h.style.animationDelay = Math.random() * 0.3 + "s";
+        document.body.appendChild(h);
+        setTimeout(() => h.remove(), 3000);
+      }
+    }
 
-yesBtn.onclick=()=>{
- yesSound.play();
- document.querySelector(".buttons").style.display="none";
- question.style.display="none";
- daysSection.style.display="block";
- showDay(1);
-};
-
-function showDay(n){
- const d=document.getElementById("day"+n);
- if(d){d.style.display="block";}
-}
-
-document.querySelectorAll(".optionBtn").forEach(btn=>{
- btn.onclick=()=>{
-   choiceSound.play();
-   confetti();
-   choices["Day "+day]=btn.innerText;
-   document.getElementById("day"+day).style.display="none";
-   day++;
-   if(day<=8){showDay(day);}
-   else{
-     daysSection.style.display="none";
-     document.getElementById("summarySection").style.display="block";
-     document.getElementById("summary").innerText=
-       Object.entries(choices).map(e=>e.join(": ")).join("\n");
-   }
- };
-});
-
-function confetti(){
- for(let i=0;i<25;i++){
-   const c=document.createElement("div");
-   c.className="confetti";
-   c.style.left=Math.random()*100+"vw";
-   c.style.background=`hsl(${Math.random()*360},80%,60%)`;
-   document.body.appendChild(c);
-   setTimeout(()=>c.remove(),1200);
- }
-}
-
-document.getElementById("submitBtn").onclick=()=>{
- const msg=Object.entries(choices).map(e=>e.join(": ")).join("\n");
- emailjs.send("YOUR_SERVICE_ID","YOUR_TEMPLATE_ID",{
-   message:msg,
-   to_email:"way21god21@gmail.com"
- });
- alert("Response sent 💕");
-};
-</script>
-
+    document.getElementById("submitBtn").onclick = () => {
+      const msg = Object.entries(choices).map(([k,v]) => `${k}: ${v}`).join("\n");
+      emailjs.send("service_jw0e08r", "YOUR_TEMPLATE_ID", { message: msg })
+        .then(() => {
+          alert("Your choices have been sent! Thank you 💕");
+        }).catch(err => {
+          console.error(err);
+          alert("Something went wrong – but I still love your choices! 💖");
+        });
+    };
+  </script>
 </body>
 </html>
