@@ -4,191 +4,130 @@
 <meta charset="UTF-8">
 <title>Be My Valentine 💖</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <style>
-  :root {
-    --pink:     #ff4081;
-    --dark:     #c2185b;
-    --light:    #fce4ec;
-    --sad:      #78909c;
-  }
-
-  body {
-    font-family: Arial, sans-serif;
-    background: linear-gradient(135deg, #ffebee, var(--light));
-    text-align: center;
-    color: var(--dark);
-    min-height: 100vh;
-    margin: 0;
-    padding: 20px 10px;
-    overflow-x: hidden;
-  }
-
-  .scene {
-    position: relative;
-    height: 220px;
-    margin: 30px 0 50px;
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
-    gap: 80px;
-  }
-
-  .character {
-    width:  140px;
-    height: 180px;
-    transition: transform 0.5s ease, filter 0.6s ease;
-  }
-
-  .boy.sad {
-    transform: translateY(10px) scale(0.96);
-    filter: brightness(0.75) saturate(0.65);
-    animation: droop 2.4s ease-in-out infinite alternate;
-  }
-
-  .boy.happy {
-    animation: jump 1.1s ease-in-out 1;
-  }
-
-  .girl.happy {
-    animation: jump 1.1s ease-in-out 1 0.15s;
-  }
-
-  @keyframes droop {
-    from { transform: translateY(10px) rotate(-4deg) scale(0.96); }
-    to   { transform: translateY(14px) rotate(4deg)  scale(0.96); }
-  }
-
-  @keyframes jump {
-    0%, 100%   { transform: translateY(0)   scale(1); }
-    40%        { transform: translateY(-40px) scale(1.08); }
-    70%        { transform: translateY(-10px) scale(1.02); }
-  }
-
-  .cracked-heart {
-    position: absolute;
-    font-size: 4.8rem;
-    color: #cfd8dc88;
-    top: 30%;
-    left: 50%;
-    transform: translateX(-50%);
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.8s ease;
-  }
-
-  .cracked-heart.visible {
-    opacity: 0.9;
-    animation: crack-shake 0.7s ease;
-  }
-
-  @keyframes crack-shake {
-    0%,100% { transform: translateX(-50%) rotate(0deg); }
-    20%     { transform: translateX(-50%) rotate(-6deg); }
-    40%     { transform: translateX(-50%) rotate(6deg);  }
-    60%     { transform: translateX(-50%) rotate(-3deg); }
-  }
-
-  .hearts-float {
-    position: absolute;
-    font-size: 2.8rem;
-    color: var(--pink);
-    pointer-events: none;
-    opacity: 0;
-    animation: float-up-heart 2.4s ease-out forwards;
-  }
-
-  @keyframes float-up-heart {
-    0%   { transform: translateY(0) scale(0.4);  opacity: 0; }
-    20%  { opacity: 0.9; }
-    100% { transform: translateY(-180px) scale(1.3); opacity: 0; }
-  }
-
-  h1 { color: var(--dark); margin: 20px 0; font-size: 2.3em; }
-  #question { font-size: 1.7em; margin: 30px 0; min-height: 1.6em; }
-  .buttons { display: flex; gap: 50px; justify-content: center; margin: 40px 0; }
-  button {
-    padding: 14px 38px;
-    font-size: 1.4em;
-    border: none;
-    border-radius: 50px;
-    cursor: pointer;
-    transition: all 0.35s;
-  }
-  #yesBtn {
-    background: var(--pink);
-    color: white;
-    box-shadow: 0 8px 24px #ff408166;
-  }
-  #yesBtn:hover { transform: scale(1.12) translateY(-3px); }
-  #noBtn { background: #e0e0e0; color: #555; }
-
-  .day {
-    display: none;
-    background: white;
-    padding: 28px;
-    margin: 35px auto;
-    max-width: 620px;
-    border-radius: 18px;
-    box-shadow: 0 10px 30px rgba(194,24,91,0.12);
-  }
-
-  .optionBtn {
-    display: block;
-    margin: 12px auto;
-    width: 82%;
-    padding: 14px;
-    background: #f8bbd0;
-    border: none;
-    border-radius: 12px;
-    cursor: pointer;
-    font-size: 1.1em;
-    transition: all 0.25s;
-  }
-  .optionBtn:hover {
-    background: #f48fb1;
-    transform: translateY(-2px);
-  }
-
-  #summarySection { display: none; padding: 40px 20px; }
-  #summary {
-    background: white;
-    padding: 28px;
-    border-radius: 16px;
-    box-shadow: 0 10px 35px rgba(0,0,0,0.07);
-    white-space: pre-wrap;
-    font-size: 1.15em;
-    max-width: 600px;
-    margin: 30px auto;
-  }
+:root {
+  --pink:#ff4081;
+  --dark:#c2185b;
+  --light:#fce4ec;
+  --sad:#78909c;
+}
+body{
+  font-family:Arial,sans-serif;
+  background:linear-gradient(135deg,#ffebee,var(--light));
+  text-align:center;
+  color:var(--dark);
+  min-height:100vh;
+  margin:0;
+  padding:20px;
+}
+.scene{
+  display:flex;
+  justify-content:center;
+  gap:80px;
+  margin:30px 0;
+}
+.character{
+  width:120px;
+  height:170px;
+  transition:0.5s;
+}
+.boy.sad{
+  filter:grayscale(70%);
+  animation:droop 2s infinite alternate;
+}
+.boy.happy,.girl.happy{
+  animation:jump 1s ease;
+}
+@keyframes droop{
+  from{transform:translateY(0)}
+  to{transform:translateY(12px)}
+}
+@keyframes jump{
+  40%{transform:translateY(-40px)}
+}
+.cracked{
+  font-size:4rem;
+  opacity:0;
+  transition:0.5s;
+}
+.cracked.show{opacity:1}
+h1{font-size:2.2em}
+#question{font-size:1.6em;margin:20px}
+.buttons{
+  display:flex;
+  justify-content:center;
+  gap:50px;
+  margin:30px 0;
+}
+button{
+  padding:14px 36px;
+  font-size:1.3em;
+  border:none;
+  border-radius:50px;
+  cursor:pointer;
+}
+#yesBtn{
+  background:var(--pink);
+  color:white;
+}
+#noBtn{
+  background:#e0e0e0;
+}
+.day{
+  display:none;
+  background:white;
+  margin:30px auto;
+  max-width:600px;
+  padding:25px;
+  border-radius:16px;
+}
+.optionBtn{
+  display:block;
+  width:80%;
+  margin:10px auto;
+  padding:12px;
+  background:#f8bbd0;
+  border:none;
+  border-radius:12px;
+  cursor:pointer;
+}
+#summarySection{display:none}
+#summary{
+  background:white;
+  padding:20px;
+  border-radius:12px;
+  max-width:600px;
+  margin:20px auto;
+  white-space:pre-wrap;
+}
 </style>
 </head>
+
 <body>
 
 <div class="scene">
-  <div style="position: relative;">
-    <svg id="boy" class="character" viewBox="0 0 120 180" fill="none" stroke="var(--sad)" stroke-width="5">
-      <!-- Simple boy silhouette -->
-      <circle cx="60" cy="40" r="28" />           <!-- head -->
-      <line x1="60" y1="68" x2="60" y2="130" />   <!-- body -->
-      <line x1="60" y1="80" x2="30" y2="110" />   <!-- left arm -->
-      <line x1="60" y1="80" x2="90" y2="110" />   <!-- right arm -->
-      <line x1="60" y1="130" x2="40" y2="170" />  <!-- left leg -->
-      <line x1="60" y1="130" x2="80" y2="170" />  <!-- right leg -->
-    </svg>
-    <div id="crackedHeart" class="cracked-heart">💔</div>
-  </div>
+  <svg id="boy" class="character boy" viewBox="0 0 100 160" stroke="var(--sad)" fill="none" stroke-width="4">
+    <circle cx="50" cy="30" r="20"/>
+    <line x1="50" y1="50" x2="50" y2="100"/>
+    <line x1="50" y1="65" x2="25" y2="85"/>
+    <line x1="50" y1="65" x2="75" y2="85"/>
+    <line x1="50" y1="100" x2="35" y2="145"/>
+    <line x1="50" y1="100" x2="65" y2="145"/>
+  </svg>
 
-  <svg id="girl" class="character" viewBox="0 0 120 180" fill="none" stroke="var(--pink)" stroke-width="5">
-    <!-- Simple girl silhouette (skirt) -->
-    <circle cx="60" cy="40" r="28" />           <!-- head -->
-    <line x1="60" y1="68" x2="60" y2="110" />   <!-- body -->
-    <line x1="60" y1="80" x2="35" y2="105" />   <!-- left arm -->
-    <line x1="60" y1="80" x2="85" y2="105" />   <!-- right arm -->
-    <polygon points="40,110 80,110 70,170 50,170" /> <!-- skirt -->
+  <svg id="girl" class="character girl" viewBox="0 0 100 160" stroke="var(--pink)" fill="none" stroke-width="4">
+    <circle cx="50" cy="30" r="20"/>
+    <line x1="50" y1="50" x2="50" y2="90"/>
+    <line x1="50" y1="65" x2="30" y2="85"/>
+    <line x1="50" y1="65" x2="70" y2="85"/>
+    <polygon points="30,90 70,90 60,150 40,150"/>
   </svg>
 </div>
 
-<h1>You make my heart skip a beat every single day 💖</h1>
+<div id="cracked" class="cracked">💔</div>
+
+<h1>You make my heart skip a beat every day 💖</h1>
 <div id="question">Will you be my Valentine? 🌸</div>
 
 <div class="buttons">
@@ -196,196 +135,99 @@
   <button id="noBtn">No 😔</button>
 </div>
 
-<!-- Audio -->
-<audio id="sadSound" preload="auto">
-  <source src="https://assets.mixkit.co/sfx/preview/mixkit-sad-piano-lose-2184.mp3" type="audio/mpeg">
-</audio>
-<audio id="happySound" preload="auto">
-  <source src="https://assets.mixkit.co/sfx/preview/mixkit-magic-sparkle-whoosh-2340.mp3" type="audio/mpeg">
-</audio>
+<audio id="sadSound" src="https://assets.mixkit.co/sfx/preview/mixkit-sad-piano-lose-2184.mp3"></audio>
+<audio id="happySound" src="https://assets.mixkit.co/sfx/preview/mixkit-magic-sparkle-whoosh-2340.mp3"></audio>
 
 <div id="daysSection">
   <div id="day1" class="day">
     <h2>🌹 Rose Day</h2>
     <button class="optionBtn">Red Rose</button>
-    <button class="optionBtn">White Rose</button>
     <button class="optionBtn">Pink Rose</button>
-    <button class="optionBtn">Yellow Rose</button>
-    <button class="optionBtn">Lavender Rose</button>
+    <button class="optionBtn">White Rose</button>
   </div>
   <div id="day2" class="day">
     <h2>🍫 Chocolate Day</h2>
     <button class="optionBtn">Dark Chocolate</button>
     <button class="optionBtn">Milk Chocolate</button>
-    <button class="optionBtn">Hazelnut Chocolate</button>
-    <button class="optionBtn">Caramel Chocolate</button>
-    <button class="optionBtn">Strawberry Chocolate</button>
   </div>
   <div id="day3" class="day">
-    <h2>🧸 Teddy Day</h2>
-    <button class="optionBtn">Classic Brown Teddy</button>
-    <button class="optionBtn">White Teddy</button>
-    <button class="optionBtn">Oversized Teddy</button>
-    <button class="optionBtn">Mini Teddy</button>
-    <button class="optionBtn">Personalized Teddy</button>
-  </div>
-  <div id="day4" class="day">
-    <h2>🤞 Promise Day</h2>
-    <button class="optionBtn">Always stand by you</button>
-    <button class="optionBtn">Choose you every day</button>
-    <button class="optionBtn">Protect your heart</button>
-    <button class="optionBtn">Grow together</button>
-    <button class="optionBtn">Love you forever</button>
-  </div>
-  <div id="day5" class="day">
-    <h2>🤗 Hug Day</h2>
-    <button class="optionBtn">Tight Hug</button>
-    <button class="optionBtn">Long Hug</button>
-    <button class="optionBtn">Surprise Hug</button>
-    <button class="optionBtn">Comfort Hug</button>
-    <button class="optionBtn">Sleepy Hug</button>
-  </div>
-  <div id="day6" class="day">
     <h2>💋 Kiss Day</h2>
     <button class="optionBtn">Forehead Kiss</button>
-    <button class="optionBtn">Cheek Kiss</button>
-    <button class="optionBtn">Kiss in the Rain</button>
     <button class="optionBtn">Perfect Kiss</button>
-    <button class="optionBtn">First Kiss</button>
-  </div>
-  <div id="day7" class="day">
-    <h2>💍 Propose Day</h2>
-    <button class="optionBtn">Private Proposal</button>
-    <button class="optionBtn">Candlelight Proposal</button>
-    <button class="optionBtn">Surprise Proposal</button>
-    <button class="optionBtn">Creative Proposal</button>
-    <button class="optionBtn">Simple Proposal</button>
-  </div>
-  <div id="day8" class="day">
-    <h2>💖 Valentine’s Day</h2>
-    <button class="optionBtn">Just Being Together 💕</button>
   </div>
 </div>
 
 <div id="summarySection">
-  <h2>Thank you for saying Yes 💖</h2>
+  <h2>Thank you for saying YES 💖</h2>
   <pre id="summary"></pre>
   <button id="submitBtn">Submit</button>
 </div>
 
+<!-- EMAILJS -->
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
 <script>
 emailjs.init("hGPy7ywWdylWrzC5o");
 
-const noTexts = [
-  "Are you sure? 🤔",
-  "Think again 😌",
-  "Really sure? 👀",
-  "What if I ask nicely? 🥺",
-  "Final answer? 😊"
+const noTexts=[
+ "Are you sure? 🤔",
+ "Think again 😌",
+ "Really sure? 👀",
+ "Please say yes 🥺"
 ];
 
-let noIndex = 0;
-let yesScale = 1;
-let day = 1;
-const choices = {};
+let noCount=0, day=1, yesScale=1;
+const choices={};
 
-const question   = document.getElementById("question");
-const yesBtn     = document.getElementById("yesBtn");
-const noBtn      = document.getElementById("noBtn");
-const boy        = document.getElementById("boy");
-const cracked    = document.getElementById("crackedHeart");
-const sadSound   = document.getElementById("sadSound");
-const happySound = document.getElementById("happySound");
-const days       = document.getElementById("daysSection");
+const q=document.getElementById("question");
+const boy=document.getElementById("boy");
+const girl=document.getElementById("girl");
+const cracked=document.getElementById("cracked");
 
-noBtn.onclick = () => {
-  sadSound.currentTime = 0;
-  sadSound.play().catch(()=>{});
-
-  question.innerText = noTexts[noIndex % noTexts.length];
-  noIndex++;
-
+document.getElementById("noBtn").onclick=()=>{
+  document.getElementById("sadSound").play();
+  q.innerText=noTexts[noCount++%noTexts.length];
   boy.classList.add("sad");
-  cracked.classList.add("visible");
-
-  setTimeout(() => {
-    cracked.classList.remove("visible");
-  }, 1800);
-
-  yesScale += 0.2;
-  yesBtn.style.transform = `scale(${yesScale})`;
+  cracked.classList.add("show");
+  yesScale+=0.2;
+  document.getElementById("yesBtn").style.transform=`scale(${yesScale})`;
+  setTimeout(()=>cracked.classList.remove("show"),1200);
 };
 
-yesBtn.onclick = () => {
-  happySound.currentTime = 0;
-  happySound.play().catch(()=>{});
-
+document.getElementById("yesBtn").onclick=()=>{
+  document.getElementById("happySound").play();
   boy.classList.remove("sad");
   boy.classList.add("happy");
-  document.getElementById("girl").classList.add("happy");
-
-  // floating hearts
-  for (let i = 0; i < 14; i++) {
-    const h = document.createElement("div");
-    h.className = "hearts-float";
-    h.textContent = "💞";
-    h.style.left = (40 + Math.random()*20) + "%";
-    h.style.bottom = "30%";
-    h.style.animationDelay = (Math.random() * 0.6) + "s";
-    document.body.appendChild(h);
-    setTimeout(() => h.remove(), 3000);
-  }
-
-  document.querySelector(".buttons").style.display = "none";
-  question.style.display = "none";
-  days.style.display = "block";
-
-  showDay(1);
+  girl.classList.add("happy");
+  document.querySelector(".buttons").style.display="none";
+  q.style.display="none";
+  document.getElementById("daysSection").style.display="block";
+  document.getElementById("day1").style.display="block";
 };
 
-function showDay(n) {
-  const d = document.getElementById("day"+n);
-  if (d) d.style.display = "block";
-}
-
-document.querySelectorAll(".optionBtn").forEach(btn => {
-  btn.onclick = () => {
-    choices["Day "+day] = btn.innerText;
-    document.getElementById("day"+day).style.display = "none";
+document.querySelectorAll(".optionBtn").forEach(btn=>{
+  btn.onclick=()=>{
+    choices["Day "+day]=btn.innerText;
+    document.getElementById("day"+day).style.display="none";
     day++;
-    if (day <= 8) showDay(day);
-    else {
-      days.style.display = "none";
-      document.getElementById("summarySection").style.display = "block";
-      document.getElementById("summary").innerText =
+    if(day<=3){
+      document.getElementById("day"+day).style.display="block";
+    }else{
+      document.getElementById("daysSection").style.display="none";
+      document.getElementById("summarySection").style.display="block";
+      document.getElementById("summary").innerText=
         Object.entries(choices).map(e=>e.join(": ")).join("\n");
     }
   };
 });
 
-document.getElementById("submitBtn").onclick = () => {
-  const msg = Object.entries(choices)
-    .map(e => e.join(": "))
-    .join("\n");
-
-  emailjs.send("service_jw0e08r", "template_q12p9o5", {
-    message: msg
-  })
-  .then(() => {
-    alert("Email SENT ✅");
-  })
-  .catch((error) => {
-    alert("ERROR ❌ — check console");
-    console.error(error);
-  });
+document.getElementById("submitBtn").onclick=()=>{
+  const msg=Object.entries(choices).map(e=>e.join(": ")).join("\n");
+  emailjs.send("service_jw0e08r","template_q12p9o5",{message:msg})
+  .then(()=>alert("Email SENT ✅"))
+  .catch(e=>{alert("ERROR ❌");console.error(e);});
 };
-  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-
-<script>
-  emailjs.init("hGPy7ywWdylWrzC5o"); 
 </script>
 
-</script>
 </body>
 </html>
