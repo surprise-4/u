@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Be My Valentine? 💕</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #ffebee, #fce4ec);
+            color: #c2185b;
+            text-align: center;
+            padding: 20px;
+            min-height: 100vh;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        h1 {
+            font-size: 2.2em;
+            margin: 20px 0;
+            color: #ad1457;
+        }
+        #question {
+            font-size: 1.6em;
+            margin: 30px 0;
+            color: #f06292;
+        }
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        button {
+            padding: 12px 28px;
+            font-size: 1.3em;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        #yesBtn {
+            background: #ff4081;
+            color: white;
+        }
+        #yesBtn:hover { transform: scale(1.08); }
+        #noBtn {
+            background: #e0e0e0;
+            color: #616161;
+        }
+        #daysSection {
+            display: none;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        .day {
+            margin: 50px 0;
+            padding: 30px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 20px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+        }
+        .day h2 {
+            color: #ec407a;
+            margin-bottom: 25px;
+            font-size: 1.8em;
+        }
+        .options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 15px;
+        }
+        .optionBtn {
+            background: #f8bbd0;
+            color: #880e4f;
+            padding: 14px;
+            font-size: 1.1em;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .optionBtn:hover {
+            background: #f48fb1;
+            transform: translateY(-3px);
+        }
+        #summarySection {
+            display: none;
+            max-width: 700px;
+            margin: 40px auto;
+        }
+        #summary {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            font-size: 1.2em;
+        }
+        #whatsappBtn {
+            background: #25D366;
+            color: white;
+            padding: 14px 30px;
+            font-size: 1.3em;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+        }
+        #whatsappBtn:hover { background: #128C7E; }
+    </style>
+</head>
+<body>
+
+    <h1>You make my heart skip a beat every single day... 💖</h1>
+    <div id="question">Will you be my Valentine? 🌸</div>
+
+    <div class="buttons">
+        <button id="yesBtn">Yes 💞</button>
+        <button id="noBtn">No 😔</button>
+    </div>
+
+    <div id="daysSection">
+
+        <div id="day1" class="day">
+            <h2>February 7th – Rose Day 🌹</h2>
+            <div class="options">
+                <button class="optionBtn" data-choice="Red Rose">Red Rose</button>
+                <button class="optionBtn" data-choice="White Rose">White Rose</button>
+                <button class="optionBtn" data-choice="Pink Rose">Pink Rose</button>
+                <button class="optionBtn" data-choice="Yellow Rose">Yellow Rose</button>
+                <button class="optionBtn" data-choice="Lavender Rose">Lavender Rose</button>
+            </div>
+        </div>
+
+        <div id="day2" class="day" style="display:none;">
+            <h2>February 8th – Propose Day 💍</h2>
+            <div class="options">
+                <button class="optionBtn" data-choice="Private Proposal">Private Proposal</button>
+                <button class="optionBtn" data-choice="Candlelight Proposal">Candlelight Proposal</button>
+                <button class="optionBtn" data-choice="Surprise Proposal">Surprise Proposal</button>
+                <button class="optionBtn" data-choice="Creative Proposal">Creative Proposal</button>
+                <button class="optionBtn" data-choice="Simple Proposal">Simple Proposal</button>
+            </div>
+        </div>
+
+        <div id="day3" class="day" style="display:none;">
+            <h2>February 9th – Chocolate Day 🍫</h2>
+            <div class="options">
+                <button class="optionBtn" data-choice="Dark Chocolate">Dark Chocolate</button>
+                <button class="optionBtn" data-choice="Milk Chocolate">Milk Chocolate</button>
+                <button class="optionBtn" data-choice="Hazelnut Chocolate">Hazelnut Chocolate</button>
+                <button class="optionBtn" data-choice="Caramel Chocolate">Caramel Chocolate</button>
+                <button class="optionBtn" data-choice="Strawberry Chocolate">Strawberry Chocolate</button>
+            </div>
+        </div>
+
+        <div id="day4" class="day" style="display:none;">
+            <h2>February 10th – Teddy Day 🧸</h2>
+            <div class="options">
+                <button class="optionBtn" data-choice="Classic Brown Teddy">Classic Brown Teddy</button>
+                <button class="optionBtn" data-choice="White Teddy">White Teddy</button>
+                <button class="optionBtn" data-choice="Oversized Teddy">Oversized Teddy</button>
+                <button class="optionBtn" data-choice="Mini Teddy">Mini Teddy</button>
+                <button class="optionBtn" data-choice="Personalized Teddy">Personalized Teddy</button>
+            </div>
+        </div>
+
+        <div id="day5" class="day" style="display:none;">
+            <h2>February 11th – Promise Day 🤝</h2>
+            <div class="options">
+                <button class="optionBtn" data-choice="Always stand by you">Always stand by you</button>
+                <button class="optionBtn" data-choice="Choose you every day">Choose you every day</button>
+                <button class="optionBtn" data-choice="Protect your heart">Protect your heart</button>
+                <button class="optionBtn" data-choice="Grow together">Grow together</button>
+                <button class="optionBtn" data-choice="Love you forever">Love you forever</button>
+            </div>
+        </div>
+
+        <div id="day6" class="day" style="display:none;">
+            <h2>February 12th – Hug Day 🤗</h2>
+            <div class="options">
+                <button class="optionBtn" data-choice="Tight Hug">Tight Hug</button>
+                <button class="optionBtn" data-choice="Long Hug">Long Hug</button>
+                <button class="optionBtn" data-choice="Surprise Hug">Surprise Hug</button>
+                <button class="optionBtn" data-choice="Comfort Hug">Comfort Hug</button>
+                <button class="optionBtn" data-choice="Sleepy Hug">Sleepy Hug</button>
+            </div>
+        </div>
+
+        <div id="day7" class="day" style="display:none;">
+            <h2>February 13th – Kiss Day 💋</h2>
+            <div class="options">
+                <button class="optionBtn" data-choice="Forehead Kiss">Forehead Kiss</button>
+                <button class="optionBtn" data-choice="Cheek Kiss">Cheek Kiss</button>
+                <button class="optionBtn" data-choice="Kiss in the Rain">Kiss in the Rain</button>
+                <button class="optionBtn" data-choice="Perfect Kiss">Perfect Kiss</button>
+                <button class="optionBtn" data-choice="First Kiss">First Kiss</button>
+            </div>
+        </div>
+
+        <div id="day8" class="day" style="display:none;">
+            <h2>February 14th – Valentine’s Day 💖</h2>
+            <p style="font-size:1.2em; margin:20px 0; color:#880e4f;">Our perfect celebration together… choose how we make today magical:</p>
+            <div class="options">
+                <button class="optionBtn" data-choice="Romantic Dinner Date">Romantic Dinner Date</button>
+                <button class="optionBtn" data-choice="Movie Night at Home with Cuddles">Movie Night at Home with Cuddles</button>
+                <button class="optionBtn" data-choice="Long Walk Under the Stars">Long Walk Under the Stars</button>
+                <button class="optionBtn" data-choice="Surprise Gift & Love Letter">Surprise Gift & Love Letter</button>
+                <button class="optionBtn" data-choice="Just Being Together, No Plans Needed">Just Being Together, No Plans Needed</button>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="summarySection">
+        <h1>Happy Valentine’s Day, my love! 💕✨</h1>
+        <div id="summary"></div>
+        <button id="whatsappBtn">Send Our Valentine Choices via WhatsApp 📱</button>
+    </div>
+
+    <!-- EmailJS (replace placeholders to make it work) -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script>
+        (function(){
+            emailjs.init("YOUR_USER_ID"); // ← Replace with your EmailJS Public Key / User ID
+        })();
+    </script>
+
+    <script>
+        const noMessages = [
+            "Are you sure? 🤔",
+            "Think again 😌",
+            "Really really sure? 👀",
+            "This is your last chance… maybe 😏",
+            "I’ll pretend I didn’t see that 😄",
+            "What if I ask nicely? 🥺",
+            "Okay but… imagine saying yes 💕",
+            "Just double-checking your heart 💓",
+            "Still no? That’s surprising 😲",
+            "Alright, final answer? 😊"
+        ];
+
+        let noCount = 0;
+        let yesScale = 1;
+
+        const question = document.getElementById('question');
+        const yesBtn = document.getElementById('yesBtn');
+        const noBtn = document.getElementById('noBtn');
+        const daysSection = document.getElementById('daysSection');
+        const summarySection = document.getElementById('summarySection');
+        const summaryDiv = document.getElementById('summary');
+        const whatsappBtn = document.getElementById('whatsappBtn');
+
+        const choices = {};
+        let currentDay = 1;
+
+        noBtn.onclick = () => {
+            question.textContent = noMessages[noCount % noMessages.length];
+            noCount++;
+            yesScale += 0.18;
+            yesBtn.style.transform = `scale(${yesScale})`;
+            yesBtn.style.padding = `${12 + noCount*3}px ${28 + noCount*6}px`;
+        };
+
+        yesBtn.onclick = () => {
+            document.querySelector('h1').style.display = 'none';
+            question.style.display = 'none';
+            document.querySelector('.buttons').style.display = 'none';
+            daysSection.style.display = 'block';
+            document.getElementById('day1').style.display = 'block';
+        };
+
+        document.querySelectorAll('.optionBtn').forEach(btn => {
+            btn.onclick = () => {
+                const dayEl = btn.closest('.day');
+                const dayNum = parseInt(dayEl.id.replace('day', ''));
+                const dayTitle = dayEl.querySelector('h2').textContent;
+                choices[dayTitle] = btn.dataset.choice;
+
+                dayEl.style.display = 'none';
+
+                if (dayNum < 8) {
+                    document.getElementById(`day${dayNum + 1}`).style.display = 'block';
+                } else {
+                    daysSection.style.display = 'none';
+                    summarySection.style.display = 'block';
+                    showSummary();
+                    sendEmail(); // will only work after you configure EmailJS
+                }
+            };
+        });
+
+        function showSummary() {
+            let html = '<h2>Our Valentine Week Journey 💞</h2>';
+            for (let day in choices) {
+                html += `<p><strong>${day}</strong><br>${choices[day]}</p>`;
+            }
+            summaryDiv.innerHTML = html;
+        }
+
+        whatsappBtn.onclick = () => {
+            let text = "Our Valentine Week Choices 💕\n\n";
+            for (let day in choices) {
+                text += `${day}: ${choices[day]}\n`;
+            }
+            const url = `https://wa.me/917005908102?text=${encodeURIComponent(text)}`;
+            window.open(url, '_blank');
+        };
+
+        function sendEmail() {
+            const message = Object.entries(choices)
+                .map(([day, choice]) => `${day}: ${choice}`)
+                .join('\n');
+
+            emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', { message })
+                .then(() => console.log('Email sent!'))
+                .catch(err => console.error('Email failed:', err));
+        }
+    </script>
+
+</body>
+</html>
