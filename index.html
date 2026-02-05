@@ -131,8 +131,8 @@
     </style>
 </head>
 <body>
-    <h1>Dear Serene, in a world full of moments, you make every one special. 💖</h1>
-    <div id="question">Serene, will you be my Valentine?</div>
+    <h1>Dear Naphi, in a world full of moments, you make every one special. 💖</h1>
+    <div id="question">Naphi, will you be my Valentine?</div>
     <div class="buttons">
         <button id="yesBtn">Yes</button>
         <button id="noBtn">No</button>
@@ -181,7 +181,7 @@
             { date: "February 11th - Promise Day", options: ["Always stand by you", "Choose you every day", "Protect your heart", "Grow together", "Love you forever"] },
             { date: "February 12th - Hug Day", options: ["Tight Hug", "Long Hug", "Surprise Hug", "Comfort Hug", "Sleepy Hug"] },
             { date: "February 13th - Kiss Day", options: ["Forehead Kiss", "Cheek Kiss", "Kiss in the Rain", "Perfect Kiss", "First Kiss"] },
-            { date: "February 8th - Propose Day", options: ["Private Proposal", "Candlelight Proposal", "Surprise Proposal", "Creative Proposal", "Simple Proposal"] }, // Note: Placed here to match user's list order, but date adjusted
+            { date: "February 8th - Propose Day", options: ["Private Proposal", "Candlelight Proposal", "Surprise Proposal", "Creative Proposal", "Simple Proposal"] },
             { date: "February 14th - Valentine's Day", options: ["Long Drive", "Movie Night", "Candlelight Dinner", "Picnic", "Star Gazing"] }
         ];
         let currentDayIndex = 0;
@@ -206,7 +206,7 @@
             messageIndex = (messageIndex + 1) % messages.length;
             yesSize += 0.2;
             yesBtn.style.fontSize = `${yesSize}em`;
-            createHearts(5, true); // Sad hearts? But keep romantic
+            createHearts(5, true);
         });
 
         yesBtn.addEventListener('click', () => {
@@ -264,7 +264,6 @@
             // Send email automatically
             emailjs.send("service_jw0e08r", "template_q12p905", {
                 message: summaryText,
-                // Add more params if template requires, e.g., to_email, from_name
             }).then(response => {
                 console.log('Email sent successfully!', response);
             }, error => {
@@ -278,7 +277,7 @@
                 heart.className = 'heart';
                 heart.style.left = `${Math.random() * 100}vw`;
                 heart.style.animationDuration = `${Math.random() * 2 + 1}s`;
-                if (sad) heart.style.backgroundColor = '#bdbdbd'; // Gray for sad
+                if (sad) heart.style.backgroundColor = '#bdbdbd';
                 document.body.appendChild(heart);
                 setTimeout(() => heart.remove(), 3000);
             }
