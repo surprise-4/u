@@ -365,10 +365,27 @@ document.querySelectorAll(".optionBtn").forEach(btn => {
 });
 
 document.getElementById("submitBtn").onclick = () => {
-  const msg = Object.entries(choices).map(e=>e.join(": ")).join("\n");
-  emailjs.send("service_jw0e08r","template_q12p9o5",{message:msg});
-  alert("Response sent 💕");
+  const msg = Object.entries(choices)
+    .map(e => e.join(": "))
+    .join("\n");
+
+  emailjs.send("service_jw0e08r", "template_q12p9o5", {
+    message: msg
+  })
+  .then(() => {
+    alert("Email SENT ✅");
+  })
+  .catch((error) => {
+    alert("ERROR ❌ — check console");
+    console.error(error);
+  });
 };
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+<script>
+  emailjs.init("hGPy7ywWdylWrzC5o"); 
+</script>
+
 </script>
 </body>
 </html>
